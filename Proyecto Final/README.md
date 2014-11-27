@@ -1,3 +1,6 @@
+Abstract
+========
+
 El análsis en tiempo real de imágenes y video es importante ya que
 existen en el mercado dispositivos que pueden aprovechar las bondades
 del análisis en todo momento de datos. Aunque este interés se ha hecho
@@ -185,7 +188,7 @@ secuencial, después se miden los tiempos. Para esto, se toman varios
 frames y el tiempo total se divide entre el total frames para obtener el
 tiempo promedio que tarda el algoritmo por frame. El experimento se
 realiza para las resoluciones 352x288, 640x480 y 1280x720. Los
-resultados se muestran en el Cuadro [table].
+resultados se muestran en el Cuadro.
 
 |**Resolución** | **CPU (ms)** 	| **GPU (ms)** 	| **SpeedUp**	|
 |---------------|---------------|---------------|---------------|
@@ -193,9 +196,7 @@ resultados se muestran en el Cuadro [table].
 | 640x480 	| 0.1161 	| 0.0395  	| 2.9392 	|
 | 1280x720	| 0.2331 	| 0.0649 	| 3.5917 	|
 
-[table]
-
-Los resultados mostrados en el Cuadro [table], muestran como al aumentar
+Los resultados mostrados en el Cuadro, muestran como al aumentar
 la resolución de la imagen el SpeedUp obtenido mejora a casi el doble.
 Además, con la implementación secuencial el tiempo que se require por
 frame para procesar una imagen de 1280x720 es 0.2331, por lo que con
@@ -209,9 +210,7 @@ tiempo que permite el análisis en tiempo real de los frames.
 | 640x480 	| 6.2274 	| 25.2996 	| 4.0626	|
 | 1280x720 	| 3.3575 	| 15.6469 	| 4.6603	|
 
-[tabla2]
-
-En el Cuadro [tabla2] se muestra, dada una resolución, los frames por
+En el Cuadro se muestra, dada una resolución, los frames por
 segundo que se obtienen. El algoritmo secuencial analiza relativamente
 fluido en tiempo real para resoluciones menores a 640x480. Por otro
 lado, el algoritmo paralelo lo hace fluido hasta la resolución máxima
