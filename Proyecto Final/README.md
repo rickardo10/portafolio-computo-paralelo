@@ -22,8 +22,8 @@ presente durante décadas, la documentación del algoritmos paralelos es
 escasa.
 
 Algunas de las aplicaciones del rastreo de objetos son: (1)
-reconocimiento de rostros humanos @5374808, control visual @6417913,
-segmentación de objetos @6466854, localización de vehículos @6469511,
+reconocimiento de rostros humanos, control visual,
+segmentación de objetos, localización de vehículos,
 entre otras aplicaciones.
 
 La metodología que se utiliza en este caso está compuesta por los
@@ -88,17 +88,16 @@ sean invariantes a traslación, escala, rotación, cambios de iluminación
 y distorsión geométrica. No obstante, pocos de los algoritmos cumplen
 las restricciones anteriores.
 
-Lowe @lowe2004distinctive fue el pionero en la detección de pixeles
+Lowe fue el pionero en la detección de pixeles
 clave y sus descriptores. Aunque es un algoritmo que es preciso, su uso
 no está abierto al público en general ya que está patentado. Una
 alternativa, y el algoritmo que se utiliza en nuestra metodología es
-SURF. SURF es un algoritmo propuesto por Bay @bay2006surf el cual es un
+SURF. SURF es un algoritmo propuesto por Bay el cual es un
 algoritmo de detección de pixeles clave y descriptivos que es mejor que
-SIFT con respecto a la repetibilidad, es más robusto y más rápido
-@bay2006surf. Aunque el aspecto más importante de SURF es que tiene una
-licencia no comercial. Existen algunas alternativas como FAST
-@trajkovic1998fast, ORB @rublee2011orb, BRISK @leutenegger2011brisk, y
-FREAK @alahi2012freak; aunque en los experimentos realizados estos
+SIFT con respecto a la repetibilidad, es más robusto y más rápido. 
+Aunque el aspecto más importante de SURF es que tiene una
+licencia no comercial. Existen algunas alternativas como FAST, ORB, BRISK, y
+FREAK; aunque en los experimentos realizados estos
 algoritmos no se desempeñaron mejor que FAST y SURF.
 
 Emparejamiento de atributos
@@ -109,15 +108,11 @@ clave que tengan una alta probabilidad de que el pixel del objeto y el
 pixel de la escena sean el mismo. En la Figura 1, se muestra como se
 emparejan los pixeles clave del objeto (imagen de la izquierda) con los
 pixeles clave de la escena (imagen de la derecha). Para el
-emparejamiento de atributos se utiliza un emparejador de fuerza bruta
-@muja2009fast [@muja2012fast; @muja2014scalable], la cual es una
+emparejamiento de atributos se utiliza un emparejador de fuerza bruta, la cual es una
 librería para realizar aproximaciones rápidas de búsquedas de vecinos
 cercanos en espacios de grandes dimensiones. Selecciona de forma
 automática el mejor algoritmo y parámetros óptimos dependiendo la base
 de datos.
-
-![Figura donde se ilustra como se hace el emparejamiento de pixeles
-clave entre un objeto y la escena.](matching)
 
 Metodología
 ===========
@@ -129,26 +124,9 @@ metodología.
 Descripción del algoritmo
 -------------------------
 
-En la Figura [fig2], se presenta el diagrama de flujo que se sigue para
+En la Figura, se presenta el diagrama de flujo que se sigue para
 el rastreo de un objeto en tiempo real. En las subsecciones siguientes
 se describe paso a paso cada uno de los procesos.
-
-= [diamond, draw, fill=blue!50, text width=7em, text badly centered,
-node distance=3cm, inner sep=0pt] = [rectangle, draw, fill=blue!20, text
-width=8.5em, text centered, rounded corners, minimum height=2em] =
-[draw, -latex’, -triangle 90] = [draw, ellipse,fill=red!20, node
-distance=3cm, minimum height=2em]
-
-[node distance=2cm, auto] (init) <span>[sec1] Adquisición de la
-imagen</span>; (segmentation) <span>[sec2] Detecciónd de pixeles clave y
-cálculo de descriptivos</span>; (threshold) <span>[sec4] Emparejar
-pixeles clave similares</span>; (recognition) <span>[sec5] Homografía y
-transformación de perspectiva</span>;
-
-(init) – (segmentation); (segmentation) – (threshold); (threshold) –
-(recognition);
-
-[fig2]
 
 ### Adquisición de la imagen {#sec1}
 
@@ -157,7 +135,7 @@ la imagen que se desea rastrear y (2) Se adquieren los frames de captura
 de video en tiempo real. Cada frame se manda al proceso de encontrar los
 pixeles clave. Este proceso se lleva a cabo de forma secuencial.
 
-### Detección de pixeles clave y cálculo de descriptivos {#sec2}
+### Detección de pixeles clave y cálculo de descriptivos
 
 En esta etapa se buscan en el objeto y en los frames los pixeles clave.
 Para esta etapa se utiliza el método SURF y se realiza de forma paralela
@@ -169,7 +147,7 @@ soportadas. La imagen objeto y el frame se envían al GPU, ambas son
 analizadas y se regresa el vector con pixeles clave y sus descriptores
 al CPU.
 
-### Emparejar pixeles clave similares {#sec4}
+### Emparejar pixeles clave similares
 
 Para el emparejamiento de pixeles clave entre el objeto que se desea
 encontrar y el frame del video se utiliza un emparejador de fuerza
@@ -181,13 +159,13 @@ el CPU, se filtran las parejas de pixeles clave; se eliminan todos los
 emparejamientos que rebasan un umbral dado. De esta manera se quitan
 algunos de los *outliers* que sólo agregan ruido al conjunto de parejas.
 
-### Homografía y transformación de perspectiva {#sec5}
+### Homografía y transformación de perspectiva
 
 En este proceso se busca marcar el objeto en el frame del video si es
 encontrado. Para esto se utiliza la matriz de perspectiva homografía y
 se aplica una transformación de perspectiva.
 
-La homografía es una matriz $H$ que busca la transformación de
+La homografía es una matriz H que busca la transformación de
 perspectiva entre dos planos tratando de minimizar un error de
 proyección. La matriz de homografía se define con el método
 Levenberg-Marquardt para reducir el erro de proyección. Además, se
@@ -209,11 +187,11 @@ tiempo promedio que tarda el algoritmo por frame. El experimento se
 realiza para las resoluciones 352x288, 640x480 y 1280x720. Los
 resultados se muestran en el Cuadro [table].
 
-<span>@llll@</span> **Resolución** & **CPU (ms)** & **GPU (ms)** &
-**SpeedUp**\
-352x288 & 0.0734 & 0.0376 & 1.9521\
-640x480 & 0.1161 & 0.0395 & 2.9392\
-1280x720 & 0.2331 & 0.0649 & 3.5917\
+|**Resolución** | **CPU (ms)** 	| **GPU (ms)** 	| **SpeedUp**	|
+|---------------|---------------|---------------|---------------|
+| 352x288 	| 0.0734 	| 0.0376  	| 1.9521 	|
+| 640x480 	| 0.1161 	| 0.0395  	| 2.9392 	|
+| 1280x720	| 0.2331 	| 0.0649 	| 3.5917 	|
 
 [table]
 
@@ -225,11 +203,11 @@ este resultado no se ve fluido el video en tiempo real. En cambio, la
 implementación en GPU requiere tan solo 0.0649 segundos por frame, un
 tiempo que permite el análisis en tiempo real de los frames.
 
-<span>@llll@</span> **Resolución** & **CPU (fps)** & **GPU (fps)** &
-**SpeedUp**\
-352x288 & 7.5151 & 26.579 & 3.5367\
-640x480 & 6.2274 & 25.2996 & 4.0626\
-1280x720 & 3.3575 & 15.6469 & 4.6603\
+| **Resolución**| **CPU (fps)** | **GPU (fps)**	| **SpeedUp** 	|
+|---------------|---------------|---------------|---------------|
+| 352x288 	| 7.5151 	| 26.579  	| 3.5367	|
+| 640x480 	| 6.2274 	| 25.2996 	| 4.0626	|
+| 1280x720 	| 3.3575 	| 15.6469 	| 4.6603	|
 
 [tabla2]
 
