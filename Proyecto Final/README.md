@@ -131,7 +131,7 @@ En la Figura, se presenta el diagrama de flujo que se sigue para
 el rastreo de un objeto en tiempo real. En las subsecciones siguientes
 se describe paso a paso cada uno de los procesos.
 
-### Adquisición de la imagen {#sec1}
+### Adquisición de la imagen
 
 La adquisición de la imagen se lleva acabo en dos etapas: (1) Se elige
 la imagen que se desea rastrear y (2) Se adquieren los frames de captura
