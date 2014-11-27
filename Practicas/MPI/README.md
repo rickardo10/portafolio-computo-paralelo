@@ -8,7 +8,7 @@ En esta sección se presentan algunos ejercicios utilizando MPI. A continuación
 
 ### Ejercicios
 
-1. Iniciando MPI. Hola Mundo con MPI. Código utilizado: hello.c
+* Iniciando MPI. Hola Mundo con MPI. Código utilizado: hello.c
 
 ```
 [rocampo@rocampo MPI]$ mpicc hello.c -o hello
@@ -17,7 +17,7 @@ Hello world
 Hello world
 ```
 
-2. Hola mundo desde el procesador, rango, total de procesos y nombre del procesador. Código utilizado: hello_processors.c
+* Hola mundo desde el procesador, rango, total de procesos y nombre del procesador. Código utilizado: hello_processors.c
 
 ```
 [rocampo@rocampo MPI]$ mpicc hello_processors.c -o hello
@@ -26,14 +26,14 @@ Hola Mundo!!! desde el procesador rocampo, rank 0 out of 2 processors
 Hola Mundo!!! desde el procesador rocampo, rank 1 out of 2 processors
 ```
 
-3. Envío y Recepción de un número entre dos procesos (Bloqueante). Código utilizado: bloqueante.c
+* Envío y Recepción de un número entre dos procesos (Bloqueante). Código utilizado: bloqueante.c
 
 ```
 [rocampo@rocampo MPI]$ mpirun hello
 Process 1 received number -1 from process 0
 ```
 
-4. Envío y Recepción de un número entre dos procesos de forma No bloqueante. Código utilizado: no-bloqueante.c
+* Envío y Recepción de un número entre dos procesos de forma No bloqueante. Código utilizado: no-bloqueante.c
 
 ```
 [rocampo@rocampo MPI]$ mpicc no-bloqueante.c -o hello
@@ -42,7 +42,7 @@ Among 2 processes, process 0 received from right neighbor: 1
 Among 2 processes, process 1 received from right neighbor: 0
 ```
 
-5. Ping-Pong. Probarlo con 2 y 4 procesos y obtener el tiempo de procesamiento en cada uno de ellos con MPI_Wtime().
+* Ping-Pong. Probarlo con 2 y 4 procesos y obtener el tiempo de procesamiento en cada uno de ellos con MPI_Wtime().
 
 ```
 [rocampo@rocampo MPI]$ mpicc ping-pong.c -o hello
@@ -56,7 +56,7 @@ n is 10
 10 ping-pongs in 0.00366402 seconds,  for an average message time of 7.32803e-10
 ```
 
-6. Qué hacen las funciones:
+* Qué hacen las funciones:
     *   *MPI_Scatter*: Envía datos de un proceso a todos los demás procesos en un comunicador.
     *   *MPI_Gather*: Reune los valores de un grupo de procesos.
     *   *MPI_Allreduce*: Combina los valores de todos los procesos y distribuye el resultado a todos los procesos.
@@ -64,7 +64,7 @@ n is 10
     *   *MPI_Barrier*: Bloquea hasta que todos los procesos en el comunicador han alcanzado la rutina.
     *   *MPI_Reduce*: Reduce los valores en todos los procesos a un solo valor.
 
-7. Calcular la suma de números de un arreglo unidimensional utilizando MPI_Scatter y MPI_Gather. Código utilizado: sum_array.c
+* Calcular la suma de números de un arreglo unidimensional utilizando MPI_Scatter y MPI_Gather. Código utilizado: sum_array.c
 
 ```
 [rocampo@rocampo MPI]$ mpicc sum_array.c -o hello
@@ -72,7 +72,7 @@ n is 10
 Execution Time: 0.000638 
 ```
 
-8. Puedes calcular la suma de números del ejemplo 7 utilizando la función MPI_Reduce para obtener el resultado. Código utilizado: sum_array_reduce.c
+* Puedes calcular la suma de números del ejemplo 7 utilizando la función MPI_Reduce para obtener el resultado. Código utilizado: sum_array_reduce.c
 
 ```
 [rocampo@rocampo MPI]$ mpicc sum_array_reduce.c -o hello
