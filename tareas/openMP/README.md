@@ -13,7 +13,7 @@ En el código para la multiplicación Matriz-Vector y Matriz-Matriz no aparece n
 
 # Ejecución
 
-```bash
+```
 Have a nice day!
 r.ocampo@10.40.53.1's password:
 Last login: Fri Sep 19 22:27:55 2014 from 10.40.127.201
