@@ -2,71 +2,49 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-/*
-! This program shows how to use MPI_Scatter and MPI_Gather
-! Each processor gets different data from the root processor
-! by way of mpi_scatter.  The data is summed and then sent back
-! to the root processor using MPI_Gather.  The root processor
-! then prints the global sum. 
-*/
-/*  globals */
-int numnodes,myid,mpi_err;
-#define mpi_root 0
-/* end globals  */
+int n,id,err;
+#define master 0
 
 void init_it(int  *argc, char ***argv);
-
 void init_it(int  *argc, char ***argv) {
-	mpi_err = MPI_Init(argc,argv);
-    mpi_err = MPI_Comm_size( MPI_COMM_WORLD, &numnodes );
-    mpi_err = MPI_Comm_rank(MPI_COMM_WORLD, &myid);
+	err = MPI_Init(argc,argv);
+    err = MPI_Comm_size( MPI_COMM_WORLD, &n );
+    err = MPI_Comm_rank(MPI_COMM_WORLD, &id);
 }
-
 int main(int argc,char *argv[]){
 	int *myray,*send_ray,*back_ray;
 	int count;
 	int size,mysize,i,k,j,total;
 	double start, end;
-        
 	init_it(&argc,&argv);
-        
-        start = MPI_Wtime();
-
-        size = 100000;
-/* each processor will get count elements from the root */
-	count=size/numnodes;
+    start = MPI_Wtime();
+    size = 100000;
+	count=size/n;
 	myray=(int*)malloc(count*sizeof(int));
-/* create the data to be sent on the root */
-	if(myid == mpi_root){
+	if(id == master){
 		send_ray=(int*)malloc(size*sizeof(int));
-		back_ray=(int*)malloc(numnodes*sizeof(int));
+		back_ray=(int*)malloc(n*sizeof(int));
 		for(i=0;i<size;i++)
 			send_ray[i]=i;
 		}
-/* send different data to each processor */
-	mpi_err = MPI_Scatter(	send_ray, count,   MPI_INT,
+	err = MPI_Scatter(	send_ray, count,   MPI_INT,
 						    myray,    count,   MPI_INT,
-	                 	    mpi_root,
+	                 	    master,
 	                 	    MPI_COMM_WORLD);
-	                
-/* each processor does a local sum */
 	total=0;
 	for(i=0;i<count;i++)
 	    total=total+myray[i];
-	printf("myid= %d total= %d\n ",myid,total);
-/* send the local sums back to the root */
-    mpi_err = MPI_Gather(&total,    1,  MPI_INT, 
+	printf("id= %d total= %d\n ",id,total);
+    err = MPI_Gather(&total,    1,  MPI_INT, 
 						back_ray, 1,  MPI_INT, 
-	                 	mpi_root,                  
+	                 	master,                  
 	                 	MPI_COMM_WORLD);
-/* the root prints the global sum */
-	if(myid == mpi_root){
+	if(id == master){
 	  total=0;
-	  for(i=0;i<numnodes;i++)
+	  for(i=0;i<n;i++)
 	    total=total+back_ray[i];
           end = MPI_Wtime(); 
-	  printf("results from all processors= %d \n ",total);
-          printf("Execution Time: %f \n\n", end - start);  
+          printf("Time: %f \n\n", end - start);  
 	}
-    mpi_err = MPI_Finalize();
+    err = MPI_Finalize();
 }

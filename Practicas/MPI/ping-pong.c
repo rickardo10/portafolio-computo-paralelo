@@ -2,38 +2,31 @@
 #include <mpi.h>
 
 main(int argc, char** argv) {
-    int         R;   /* My process rank           */
-    int         P;   /* The number of processes   */
-    int         ping = 1;  /* server process of ping-pong */
-    int         pong = 2;  /* defender process of ping-pong */
-    int         tag = 0;
-    int         n = 0;   /* number of ping-pong's back and forth */
-    const int size = 250000; /* length of message */
-    int         k[size];   /* message content */
+    int         R, P, ping = 1, pong = 2, tag = 0;
+    int         n = 0;  
+    const int size = 250000;
+    int         k[size]; 
     int         i;
-    float       x = 0;  /* for the multiply-add loop */
+    float       x = 0;
     char       *s;
     MPI_Status  status;
     MPI_Comm    World = MPI_COMM_WORLD;
-    double      start_time, elapsed_time; /* for time measurement */
+    double      start_time, elapsed_time;
 
     if (atoi(argv[1]) < 6) 
     {	printf("Usage: %s n [where n is number of ping-pong steps ]\n", argv[0]);
 	return 0;
     }
 
-    /* Let the system do what it needs to start up MPI */
     MPI_Init(&argc, &argv);
-    MPI_Comm_size(World, &P); // number of procs
+    MPI_Comm_size(World, &P);
     if (P < 3) { printf("this requires 3 processes\n"); return 0; }
-    MPI_Comm_rank(MPI_COMM_WORLD, &R); // my rank in [0..P).
+    MPI_Comm_rank(MPI_COMM_WORLD, &R); 
     if (R == 0) printf( "%d %d %s\n", n, argc, argv[0]);
 
-    //n = atoi(argv[1]);  // for some reason, trouble finding atoi().
     for (s = argv[1]; *s > 0; ++s) n = 10*n + (*s - '0');
     printf("n is %d\n ", n);
     
-    // measure an arithmetic time
     MPI_Barrier(World);
     if (R == ping)
     {   start_time = MPI_Wtime();
@@ -43,9 +36,8 @@ main(int argc, char** argv) {
 	printf(" for an average time of %g\n", elapsed_time/size);
     }
 
-    // measure per send communication time
     MPI_Barrier(World);
-    if (R == ping) /* Note:  it is not always valid that process one can output */
+    if (R == ping)
     {   start_time = MPI_Wtime();
 	for (i = 0; i < n; ++i)
 	{   k[0] = i;
@@ -66,9 +58,8 @@ main(int argc, char** argv) {
 	    MPI_Send(k, 1, MPI_INT, ping, tag, World);
 	}
 
-    // measure per byte moved communication time
     MPI_Barrier(World);
-    if (R == ping) /* Note:  it is not always valid that process one can output */
+    if (R == ping) 
     {   start_time = MPI_Wtime();
 	for (i = 0; i < n; ++i)
 	{   k[0] = i;
@@ -89,7 +80,6 @@ main(int argc, char** argv) {
 	    MPI_Send(k, size, MPI_INT, ping, tag, World);
 	}
 
-    /* Shut down MPI */
     MPI_Finalize();
-} /*  main  */
+}
 
