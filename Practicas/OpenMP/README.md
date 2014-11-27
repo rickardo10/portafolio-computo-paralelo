@@ -1,4 +1,9 @@
-# Introducción
+Ejercicios de OpenMP
+====================
+
+
+Introducción
+------------
 
 Le comparto mis resultados del código en openMP. En el archivo "resultados.txt" le comparto la impresión de pantalla que me arroja el código.
 
@@ -11,7 +16,8 @@ En cada una de esas funciones vienen los pasos que se necesitan realizar para ej
 
 En el código para la multiplicación Matriz-Vector y Matriz-Matriz no aparece ningún #pragma, porque no se paraleliza nada en esa parte. La parte de la paralelización está en el producto punto ya que considero que es el punto crítico que debe ser paralelizado, después, esa función es llamada en la multiplicación Matriz-Vector y Matriz-Matriz, convirtiendo así, estas funciones, en funciones paralelas.
 
-# Ejecución
+Ejecución
+---------
 
 ```
 Have a nice day!
@@ -30,6 +36,7 @@ C =
 825.000000
 
 Se efectuará la multiplicación entre Matriz y Vector Y = A * x donde,
+
 A =
 3.000000 3.000000 3.000000 3.000000 3.000000 3.000000
 3.000000 3.000000 3.000000 3.000000 3.000000 3.000000
@@ -40,9 +47,12 @@ A =
 
 x =
 0.000000 4.000000 8.000000 12.000000 16.000000 20.000000
+
 Y =
 180.000000 180.000000 180.000000 180.000000 180.000000 180.000000
+
 Se efectuará la multiplicación entre Matriz y Matriz Y = A * B donde,
+
 A =
 3.000000 3.000000 3.000000 3.000000 3.000000 3.000000
 3.000000 3.000000 3.000000 3.000000 3.000000 3.000000
@@ -68,4 +78,3 @@ Y =
 144.000000 144.000000 144.000000 144.000000 144.000000 144.000000
 
 ```
-
