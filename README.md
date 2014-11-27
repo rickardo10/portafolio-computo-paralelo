@@ -3,12 +3,12 @@ Introducción
 
 En este repositorio se encuentra el portafolio de evidencias para la materia **Cómputo paralelo y distribuido**. El objeto de este portafolio es recopilar todo el trabajo realizado a lo largo del curso y concentrarlo en un solo recurso. Los trabajos se estructuran de la siguiente manera:
 
-* Examen Parcial: Se presentan los examenes parciales que se realizaron en el curso.
-* Extras: Tareas de teoría que se realizaron.
-* Prácticas: Se encuentran todas las prácticas del curso. Las cuales se encuentran estructuradas en CUDA, MPI-OpenMPI, MPI y OpenMP.
-* Presentaciones: Las presentaciones realizadas por la maestra que fueron material de apoyo para el curso.
-* Proyecto Final: Se encuentran los archivos fuente y el documento final.
-* Reportes: Contienen los reportes de los artículos científicos que fueron analizados a lo largo del curso.
+* *Examen Parcial*: Se presentan los examenes parciales que se realizaron en el curso.
+* *Extras*: Tareas de teoría que se realizaron.
+* *Prácticas*: Se encuentran todas las prácticas del curso. Las cuales se encuentran estructuradas en CUDA, MPI-OpenMPI, MPI y OpenMP.
+* *Presentaciones*: Las presentaciones realizadas por la maestra que fueron material de apoyo para el curso.
+* *Proyecto Final*: Se encuentran los archivos fuente y el documento final.
+* *Reportes*: Contienen los reportes de los artículos científicos que fueron analizados a lo largo del curso.
 
 Todo lo anterior con la finalidad de auxiliarme para evaluar mi propio trabajo y ayudar a personas que están entrando en el tema a hacerlo más sencillo.
 
