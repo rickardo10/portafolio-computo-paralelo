@@ -1,3 +1,6 @@
+Conceptos de cómputo paralelo
+=============================
+
 **Sincronización:** Un algoritmo paralelo sincronizado es aquel que tiene un proceso tal que en alguna etapa del proceso, no es activado hasta que otro proceso ha finalizado una porción del programa. El tiempo puede ser alcanzado por usar diferentes primitivos de sincronización.
 
 **Granularidad:** Es una medida cualitativa de la relación que existe entre la computación y la comunicación. Los periodos de computación son separados por periodos de comunicación por eventos de sincronización.
