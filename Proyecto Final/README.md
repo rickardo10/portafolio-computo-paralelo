@@ -1,7 +1,7 @@
 Abstract
 ========
 
-El análsis en tiempo real de imágenes y video es importante ya que
+El análisis en tiempo real de imágenes y video es importante ya que
 existen en el mercado dispositivos que pueden aprovechar las bondades
 del análisis en todo momento de datos. Aunque este interés se ha hecho
 presente desde hace decadas, no se ha prestado mucha antención en el
