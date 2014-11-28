@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
-#include "omp.h"
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
@@ -30,8 +29,6 @@ int main( int argc, char *argv[] ){
 
     int h, w;
     Mat img_object;
-    double t_time;
-    double t_fps;
     // Checks if the WEIGHT and HEIGHT are set
     if( argc < 3 ){
         cout << "Warning: The frame size was not set. 1280x720 set by default." << endl;
@@ -87,7 +84,6 @@ int main( int argc, char *argv[] ){
     // Video Frames
 	for(;;){
         // fps counter begin
-        double s = omp_get_wtime();
         if (counter == 0){
             time(&start);
         }
@@ -175,10 +171,6 @@ int main( int argc, char *argv[] ){
         counter++;
         sec = difftime(end, start);
         fps = counter/sec;
-        double diff = omp_get_wtime() - s;
-        t_time += diff;
-        if( fps < 50 )
-            t_fps += fps;
 
         // Creates a string for FPS
         stringstream sstm;
@@ -202,9 +194,6 @@ int main( int argc, char *argv[] ){
  			break;
 		}
 	} // Ends Video frames
-    
-    cout << "Mean time: " << t_time / counter << " ms" << endl;
-    cout << "Mean FPS: " << t_fps / counter << endl;
 
 	return 0;
 }
