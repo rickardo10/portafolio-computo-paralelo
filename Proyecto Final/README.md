@@ -9,7 +9,7 @@ avance en el desarrollo de algoritmos paralelos. En el presente reporte
 se muestra el beneficio que se puede obtener al paralelizar un
 algoritmo. En este caso se paraleliza un algoritmo para rastreo de
 objetos. En el análisis se llega a obtener un SpeedUp de hasta 4.66x, lo
-que permite que se reastreen objetos en tiempo real para imágenes de
+que permite que se rastreen objetos en tiempo real para imágenes de
 resolución 1280x760.
 
 Introducción
