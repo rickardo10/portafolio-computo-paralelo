@@ -43,10 +43,8 @@ int main(int argc, char **argv) {
 
   // Copying From Device to Host
   cudaMemcpy(h_datos, d_datos, sizeof(int)*1024, cudaMemcpyDeviceToHost);
-   for (int i = 0; i < 1024; i++)
-     printf("\n %d", h_datos[i]); 
 
-   printf("\t Time : %f ms\n",time);
+   printf("Time : %f ms\n",time);
 
   cudaEventDestroy(start);
   cudaEventDestroy(stop); 

@@ -92,7 +92,7 @@ int main(int argc, char* argv[]){
   cudaEventRecord(stop,0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&time, start, stop);
-  printf("\t Time : %f ms\n",time);
+  printf("Time : %f ms\n",time);
 
   // Result from Device to Host
   cudaMemcpy(C_h, C_d, size,cudaMemcpyDeviceToHost);

@@ -45,7 +45,7 @@ int main( int argc, char* argv[] ){
     }
   }
   double end = omp_get_wtime( );
-  printf("\t Time = %.2f ms\n", ( end - start ) * 1000 );
+  printf("Time = %.2f ms\n", ( end - start ) * 1000 );
 
   return 0;
 }

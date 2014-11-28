@@ -1,8 +1,8 @@
 #include<stdio.h>
-#define N 10
+#define N 1000
 
 __global__ void addvec(int *a, int *b, int *c) {
-  __shared__ int s[N];
+__shared__ int s[N];
         
   if(threadIdx.x<N) {
     s[threadIdx.x]=a[threadIdx.x]+b[threadIdx.x]; 
@@ -49,12 +49,7 @@ int main(void){
   //copiar el arreglo 'c' de la GPU a la CPU
   cudaMemcpy(c,dev_c,N*sizeof(int),cudaMemcpyDeviceToHost);
 
-  //Desplegar el resultado
-  for(int i=0; i<N; i++){
-    printf("%d+%d=%d\n",a[i],b[i],c[i]);
-  }
-  
-  printf("\t Time : %f ms\n",time);
+  printf("Time : %f ms\n",time);
 
   cudaFree(dev_a);
   cudaFree(dev_b);
