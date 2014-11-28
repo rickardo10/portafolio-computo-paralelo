@@ -1,23 +1,84 @@
 Ejercicios de OpenMP
 ====================
 
-
 Introducción
 ------------
 
-Le comparto mis resultados del código en openMP. En el archivo "resultados.txt" le comparto la impresión de pantalla que me arroja el código.
+En esta sección se presentan algunos ejercicios utilizando OpenMP. A continuación se describirán cada uno de los incisos, el código que se utilizó, y el resultado arrojado por el programa.
 
-En el código vienen 3 funciones: 
-	1) ejercicio_6.
-	2) ejercicio_7.
-	3) ejercicio_8. 
+Ejercicios
+----------
 
-En cada una de esas funciones vienen los pasos que se necesitan realizar para ejecutar el código. En este momento se ejecuta el código utilizando matrices cuatradas con un sólo valor, ya que es la manera más sencilla de crear matrices rápidamente y verificar el resultado. El procedimiento que realicé es paralelizar el producto punto y en la multiplicación Matriz-Vector y Matriz-Matriz se manda llamar por cada celda que se requiere el resultado. 
+* Versión instalada de OpenMP. Código utilizado: version.c
 
-En el código para la multiplicación Matriz-Vector y Matriz-Matriz no aparece ningún #pragma, porque no se paraleliza nada en esa parte. La parte de la paralelización está en el producto punto ya que considero que es el punto crítico que debe ser paralelizado, después, esa función es llamada en la multiplicación Matriz-Vector y Matriz-Matriz, convirtiendo así, estas funciones, en funciones paralelas.
+```
+[rocampo@rocampo OpenMP]$ gcc -fopenmp -o version version.c
+[rocampo@rocampo OpenMP]$ ./version
+Este  es nuestro primer ejemplo en openMP
 
-Ejecución
----------
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+Hola mundo
+
+La version instalada de OpenMP es: 201307
+```
+
+* Número de cores disponibles en el equipo, ID actual y número total de threads. Código utilizado: cores.c
+
+```
+[rocampo@rocampo OpenMP]$ gcc -fopenmp cores.c
+[rocampo@rocampo OpenMP]$ ./a.out
+Este es nuestro segundo ejemplo en openMP
+3:hello multicore user! I am thread 3 out of 8
+7:hello multicore user! I am thread 7 out of 8
+4:hello multicore user! I am thread 4 out of 8
+6:hello multicore user! I am thread 6 out of 8
+2:hello multicore user! I am thread 2 out of 8
+5:hello multicore user! I am thread 5 out of 8
+1:hello multicore user! I am thread 1 out of 8
+0 : NCPU    = 8
+0 : NTHR    = 8
+0 : NPR     = 8
+0:hello multicore user! I am thread 0 out of 8
+```
+
+* Suma de vectores en paralelo. Código utilizado: sum_vec.c
+
+```
+[rocampo@rocampo OpenMP]$ gcc -fopenmp sum_vec_sec.c
+[rocampo@rocampo OpenMP]$ ./a.out 100000000
+Time = 0.362933
+```
+
+* Suma de vectores en secuencial. Código utilizado: sum_vec_sec.c
+
+```
+[rocampo@rocampo OpenMP]$ gcc -fopenmp sum_vec.c
+[rocampo@rocampo OpenMP]$ ./a.out 100000000
+Time = 0.287442
+```
+
+* Probar el código de suma de vectores com más threads que cores existen en la computadora. Código utilizado: sum_vec.c
+
+```
+[rocampo@rocampo OpenMP]$ gcc -fopenmp sum_vec.c
+[rocampo@rocampo OpenMP]$ ./a.out
+Time = 0.352524
+```
+
+* Reducir el problema de Matriz Punto. Código utilizado: openMP.c
 
 ```
 Have a nice day!
@@ -34,7 +95,11 @@ B =
 0.000000 5.000000 10.000000 15.000000 20.000000 25.000000
 C =
 825.000000
+```
 
+* Multiplicación Matriz-Vector. Código utilizado: openMP.c
+
+```
 Se efectuará la multiplicación entre Matriz y Vector Y = A * x donde,
 
 A =
@@ -50,7 +115,11 @@ x =
 
 Y =
 180.000000 180.000000 180.000000 180.000000 180.000000 180.000000
+```
 
+* Multiplicación de matriz-matriz. Código utilizado: openMP.c
+
+```
 Se efectuará la multiplicación entre Matriz y Matriz Y = A * B donde,
 
 A =
@@ -76,5 +145,4 @@ Y =
 144.000000 144.000000 144.000000 144.000000 144.000000 144.000000
 144.000000 144.000000 144.000000 144.000000 144.000000 144.000000
 144.000000 144.000000 144.000000 144.000000 144.000000 144.000000
-
 ```
